@@ -26,55 +26,53 @@ sudo systemctl enable mysql
 echo "Setup complete ✅"
 
 
-Database:
-=======
+Database:  
+=======  
 
-CREATE USER 'appuser'@'localhost' IDENTIFIED BY 'apppassword';
-GRANT ALL PRIVILEGES ON appdb.* TO 'appuser'@'localhost';
+CREATE USER 'appuser'@'localhost' IDENTIFIED BY 'apppassword';  
+GRANT ALL PRIVILEGES ON appdb.* TO 'appuser'@'localhost';  
 FLUSH PRIVILEGES;
 
-CREATE DATABASE appdb;
-
-USE appdb;
+CREATE DATABASE appdb;  
+USE appdb;  
 
 CREATE TABLE users (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
   username VARCHAR(50) UNIQUE NOT NULL,
   password VARCHAR(255) NOT NULL,
   name VARCHAR(100) NOT NULL
-);
+);  
 
-INSERT INTO users (username, password, name)
-VALUES ('123', '123', 'Surendra');
+INSERT INTO users (username, password, name) VALUES ('123', '123', 'Surendra');
 
 
 Backend:
 =======
 
-mvn clean install
-mvn spring-boot:run
+mvn clean install  
+mvn spring-boot:run  
 
-curl -X POST http://localhost:8080/api/register   -H "Content-Type: application/json"   -d '{"username":"111","password":"111","name":"Surendra"}'
+curl -X POST http://localhost:8080/api/register   -H "Content-Type: application/json"   -d '{"username":"111","password":"111","name":"Surendra"}'  
 
 
 Front-end:
 =======
-frontend-react/.env
-REACT_APP_API_URL=/api 
+frontend-react/.env  
+REACT_APP_API_URL=/api   
 
-npm clean install
-nom spring-boot:run
+npm clean install   
+nom spring-boot:run  
 
 Nginx :
 =====
 
-sudo mkdir -p /var/www/react
-sudo rm -rf /var/www/react/*
-sudo cp -r build/* /var/www/react/
+sudo mkdir -p /var/www/react  
+sudo rm -rf /var/www/react/*  
+sudo cp -r build/* /var/www/react/  
 
-sudo chown -R www-data:www-data /var/www/react
+sudo chown -R www-data:www-data /var/www/react  
 
-sudo vi /etc/nginx/sites-enabled/default
+sudo vi /etc/nginx/sites-enabled/default  
 
 server {
     listen 80;
@@ -94,6 +92,6 @@ server {
     }
 }
 
-sudo nginx -t
-sudo systemctl restart nginx
-sudo systemctl reload nginx
+sudo nginx -t  
+sudo systemctl restart nginx  
+sudo systemctl reload nginx  
