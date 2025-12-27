@@ -74,7 +74,7 @@ sudo chown -R www-data:www-data /var/www/react
 
 sudo vi /etc/nginx/sites-enabled/default  
 
-''' 
+<pre style="color: orange;">
 server {
     listen 80;
     server_name _;
@@ -92,7 +92,8 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
     }
 }
-... 
+</pre>
+
 
 sudo nginx -t  
 sudo systemctl restart nginx  
