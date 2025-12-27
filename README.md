@@ -60,8 +60,8 @@ Front-end:
 frontend-react/.env  
 REACT_APP_API_URL=/api   
 
-npm clean install   
-nom spring-boot:run  
+npm install  
+npm run build  
 
 Nginx :
 =====
