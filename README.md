@@ -28,7 +28,7 @@ echo "Setup complete ✅"
 
 Database:  
 =======  
-
+sudo mysql  
 CREATE USER 'appuser'@'localhost' IDENTIFIED BY 'apppassword';  
 GRANT ALL PRIVILEGES ON appdb.* TO 'appuser'@'localhost';  
 FLUSH PRIVILEGES;
