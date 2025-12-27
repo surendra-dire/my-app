@@ -1,6 +1,10 @@
 import { useLocation } from "react-router-dom";
 
 export default function Welcome() {
-  const { state } = useLocation();
-  return <h1>Welcome {state?.name}</h1>;
+  const location = useLocation();
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+
+  const name = location.state?.name || storedUser?.name;
+
+  return <h1>Welcome {name}</h1>;
 }
