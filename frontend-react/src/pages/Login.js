@@ -15,48 +15,52 @@ export default function Login() {
         `${process.env.REACT_APP_API_URL}/api/login`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json"
+          },
           body: JSON.stringify({ username, password })
         }
       );
 
       if (!res.ok) {
-        throw new Error("Invalid username or password");
+        setError("Invalid username or password");
+        return;
       }
 
-      const data = await res.json();
+      const user = await res.json();
 
-      // Persist user info (important!)
-      localStorage.setItem("user", JSON.stringify(data));
-
-      // Navigate with state (fast UI update)
-      navigate("/welcome", { state: { name: data.name } });
+      // Go to quotes page with logged-in user
+      navigate("/quotes", { state: { user } });
 
     } catch (err) {
-      setError(err.message);
+      setError("Server error. Please try again.");
     }
   };
 
   return (
-    <div>
+    <div style={{ maxWidth: "300px", margin: "auto" }}>
       <h2>Login</h2>
+
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
       <input
         placeholder="Username"
         value={username}
         onChange={e => setUsername(e.target.value)}
+        style={{ width: "100%", marginBottom: "10px" }}
       />
 
       <input
-        placeholder="Password"
         type="password"
+        placeholder="Password"
         value={password}
         onChange={e => setPassword(e.target.value)}
+        style={{ width: "100%", marginBottom: "10px" }}
       />
 
-      <button onClick={login}>Login</button>
-
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      <button onClick={login} style={{ width: "100%" }}>
+        Login
+      </button>
     </div>
   );
 }
